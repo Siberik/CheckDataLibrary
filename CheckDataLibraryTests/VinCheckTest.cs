@@ -73,12 +73,27 @@ namespace CheckDataLibraryTests
         {
             //Arrange
             string vin = "JHMCM56557C404453";
-            int year = 2000;
+            int year = 2012;
             //Act
             VinCheck check = new VinCheck();
             bool actual = check.CheckVin(vin, year);
             //Assert
             Assert.IsTrue(actual);
+        }
+        /// <summary>
+        /// Проверка на несоответствующий год
+        /// </summary>
+        [TestMethod]
+        public void CheckVin_UnRightVin_ReturnedFalse()
+        {
+            //Arrange
+            string vin = "JHMCM56557C404453";
+            int year = 2010;
+            //Act
+            VinCheck check = new VinCheck();
+            bool actual = check.CheckVin(vin, year);
+            //Assert
+            Assert.IsFalse(actual);
         }
         /// <summary>
         /// Проверка на большой год
@@ -95,6 +110,9 @@ namespace CheckDataLibraryTests
             //Assert
             Assert.IsFalse(actual);
         }
+        /// <summary>
+        /// Проверка на специальные символы
+        /// </summary>
         [TestMethod]
         public void CheckVin_SpecialSymbols_ReturnedFalse()
         {
@@ -107,6 +125,9 @@ namespace CheckDataLibraryTests
             //Assert
             Assert.IsFalse(actual);
         }
+        /// <summary>
+        /// Проверка на запрещённый символ Q
+        /// </summary>
         [TestMethod]
         public void CheckVin_ForbiddenSymbolQ_ReturnedFalse()
         {
@@ -119,6 +140,9 @@ namespace CheckDataLibraryTests
             //Assert
             Assert.IsFalse(actual);
         }
+        /// <summary>
+        /// Проверка на запрщённый символ I
+        /// </summary>
         [TestMethod]
         public void CheckVin_ForbiddenSymbolI_ReturnedFalse()
         {
@@ -131,6 +155,9 @@ namespace CheckDataLibraryTests
             //Assert
             Assert.IsFalse(actual);
         }
+        /// <summary>
+        /// Проверка на запрещённый символ O
+        /// </summary>
         [TestMethod]
         public void CheckVin_ForbiddenSymbolO_ReturnedFalse()
         {
