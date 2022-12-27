@@ -17,7 +17,8 @@ namespace CheckDataLibrary
         {
         
         };
-        int key = 0;
+       public string code = "ABCDEFGHJKLMPRSTVWXY123456789";
+       
         int[] digitVIN = new int[17]; 
         /// <summary>
         /// Проверка на правильность введённого VIN и даты
@@ -35,7 +36,7 @@ namespace CheckDataLibrary
         {
 
 
-            string code = "ABCDEFGHJKLMPRSTVWXY123456789";
+            
             int yearKey = year - 1980;
             while(yearKey>=30)
             {
@@ -50,7 +51,7 @@ namespace CheckDataLibrary
             {
                 return false;
             }
-            if (vin[10] != code[yearKey])
+            if (vin[9] != code[yearKey])
             {
                 return false;
             }
@@ -159,6 +160,25 @@ namespace CheckDataLibrary
             }
              
             return true;
+        }
+        public string GetVINCountry(string vin) 
+        {
+            string country = "Неправильно введён VIN";
+            int VINyears = 1980;
+            for (int i = 0; i < code.Length; i++)
+            {
+                if (code[i] == Convert.ToInt32(vin[9]))
+                {
+                    VINyears += i;
+                }
+            }
+            country = VINyears.ToString();
+            VinCheck obj = new VinCheck();
+            if (obj.CheckVin(vin, VINyears))
+            {
+                country = "Япония";
+            }
+            return country;
         }
     }
 }

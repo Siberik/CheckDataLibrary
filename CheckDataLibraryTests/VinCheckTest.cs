@@ -73,7 +73,7 @@ namespace CheckDataLibraryTests
         {
             //Arrange
             string vin = "JHMCM56557C404453";
-            int year = 2012;
+            int year = 2006;
             //Act
             VinCheck check = new VinCheck();
             bool actual = check.CheckVin(vin, year);
@@ -169,6 +169,21 @@ namespace CheckDataLibraryTests
             bool actual = check.CheckVin(vin, year);
             //Assert
             Assert.IsFalse(actual);
+        }
+        /// <summary>
+        /// Проверка на запрещённый символ O
+        /// </summary>
+        [TestMethod]
+        public void GetVINCountry_ForbiddenSymbolO_ReturnedFalse()
+        {
+            //Arrange
+            string vin = "JHMCM56557C404453";
+            string excepted = "Япония";
+            //Act
+            VinCheck check = new VinCheck();
+            string actual = check.GetVINCountry(vin);
+            //Assert
+            Assert.AreEqual(excepted,actual);
         }
     }
 }
